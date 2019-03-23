@@ -13,5 +13,10 @@ namespace KeyMaster
         {
             InitializeComponent();
         }
+
+        void OnItemAdded(object sender, EventArgs e)
+        {
+
+        }
     }
 }

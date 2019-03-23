@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyMaster.iOS", "KeyMaster\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyMaster.UWP", "KeyMaster\KeyMaster.UWP\KeyMaster.UWP.csproj", "{0F6DEEF7-1162-4100-AE5D-26235142C7FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyMaster", "KeyMaster\KeyMaster\KeyMaster.csproj", "{076A013F-C24C-4315-8EAF-EDA5DDF0A3AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyMaster", "KeyMaster\KeyMaster\KeyMaster.csproj", "{076A013F-C24C-4315-8EAF-EDA5DDF0A3AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -219,9 +219,9 @@ Global
 		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.AppStore|x86.ActiveCfg = Release|x86
 		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.AppStore|x86.Build.0 = Release|x86
 		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.AppStore|x86.Deploy.0 = Release|x86
-		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|Any CPU.Build.0 = Debug|x86
-		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|Any CPU.Build.0 = Debug|x64
+		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|Any CPU.Deploy.0 = Debug|x64
 		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|ARM.ActiveCfg = Debug|ARM
 		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|ARM.Build.0 = Debug|ARM
 		{0F6DEEF7-1162-4100-AE5D-26235142C7FA}.Debug|ARM.Deploy.0 = Debug|ARM
