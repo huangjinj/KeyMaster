@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KeyMaster.Models;
+using KeyMaster.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +11,32 @@ namespace KeyMaster
 {
     public partial class MainPage : ContentPage
     {
+        ItemsViewModel viewModel;
+
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = viewModel = new ItemsViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
         }
 
         void OnItemAdded(object sender, EventArgs e)
         {
 
+        }
+
+        void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as Item;
+            if (item == null)
+                return;
         }
     }
 }

@@ -5,7 +5,7 @@
              x:Class="KeyMaster.MainPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="新建" Clicked="OnItemAdded" >
+        <ToolbarItem Text="Add" Clicked="OnItemAdded" >
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="Android, UWP" Value="plus.png" />
@@ -14,15 +14,22 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <!--<ListView x:Name="listView"
+    <ListView x:Name="listView"
+              ItemsSource="{Binding Items}"
+              RefreshCommand="{Binding LoadItemsCommand}"
               Margin="20"
               ItemSelected="OnListViewItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Text}"
-                          Detail="{Binding Date}" />
+                <ViewCell>
+                    <StackLayout Margin="20,0,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding Name}"  />
+                        <Label Text="{Binding Account}" />
+                        <Label Text="{Binding Password}" />
+                    </StackLayout>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
-    </ListView>-->
+    </ListView>
 
 </ContentPage>
