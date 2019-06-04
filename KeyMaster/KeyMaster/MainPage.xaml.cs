@@ -27,9 +27,12 @@ namespace KeyMaster
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
-        void OnItemAdded(object sender, EventArgs e)
+        async void OnItemAdded(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new ItemPage
+            {
+                BindingContext = new Item()
+            });
         }
 
         void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)

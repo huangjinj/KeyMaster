@@ -1,6 +1,8 @@
 ﻿using KeyMaster.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,59 +11,65 @@ namespace KeyMaster.Services
 {
     public class LocalDBDataStore : IDataStore<Item>
     {
-        List<Item> items;
+        readonly static SQLiteAsyncConnection database;
 
-        public LocalDBDataStore()
+        static LocalDBDataStore()
         {
-            items = new List<Item>();
-            var mockItems = new List<Item>
+            if(database == null)
             {
-                new Item { ID = 1, Name = "First item", Account = "Account1", Password="Password1" },
-                new Item { ID = 2, Name = "Second item", Account = "Account2",Password="Password2" },
-                new Item { ID = 3, Name = "Third item", Password="Password3" },
-                new Item { ID = 4, Name = "Fourth item", Password="Password4" },
-                new Item { ID = 5, Name = "Fifth item", Password="Password5" },
-                new Item { ID = 6, Name = "Sixth item", Account = "Account6", Password="Password6" },
-            };
+                database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KeyMasterSQLite.db3"));
+                database.CreateTableAsync<Item>().Wait();
+            }
+        }
 
-            foreach (var item in mockItems)
+        private LocalDBDataStore()
+        {
+
+        }
+
+        static LocalDBDataStore _instance;
+        public static LocalDBDataStore Instance
+        {
+            get
             {
-                items.Add(item);
+                if (_instance == null)
+                {
+                    _instance = new LocalDBDataStore();
+                }
+                return _instance;
             }
         }
 
         public async Task<bool> AddItemAsync(Item item)
         {
-            items.Add(item);
-
-            return await Task.FromResult(true);
+            if (item.ID != 0)
+            {
+                return await database.UpdateAsync(item) >= 0;
+            }
+            else
+            {
+                return await database.InsertAsync(item) >= 0;
+            }
         }
 
         public async Task<bool> UpdateItemAsync(Item item)
         {
-            var oldItem = items.Where((Item arg) => arg.ID == item.ID).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
-
-            return await Task.FromResult(true);
+            return await database.UpdateAsync(item) >= 0;
         }
 
         public async Task<bool> DeleteItemAsync(Item item)
         {
-            var oldItem = items.Where((Item arg) =>  arg.ID== item.ID).FirstOrDefault();
-            items.Remove(oldItem);
-
-            return await Task.FromResult(true);
+            return await database.DeleteAsync(item) >= 0;
         }
 
         public async Task<Item> GetItemAsync(int id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.ID == id));
+            return await database.Table<Item>().Where(i => i.ID == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Item>> GetItemsAsync()
         {
-            return await Task.FromResult(items);
+            return await database.Table<Item>().ToListAsync();
         }
     }
 }

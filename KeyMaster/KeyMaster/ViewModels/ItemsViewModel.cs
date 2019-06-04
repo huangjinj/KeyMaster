@@ -33,7 +33,7 @@ namespace KeyMaster.ViewModels
             try
             {
                 Items.Clear();
-                IDataStore<Item> DataStore = new LocalDBDataStore();
+                IDataStore<Item> DataStore = LocalDBDataStore.Instance;
                 var items = await DataStore.GetItemsAsync();
                 foreach (var item in items)
                 {
