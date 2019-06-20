@@ -15,33 +15,45 @@
     </ContentPage.ToolbarItems>
 
     <ListView x:Name="listView"
-              ItemsSource="{Binding Items}"
+              ItemsSource="{Binding Items,Mode=TwoWay}"
               RefreshCommand="{Binding LoadItemsCommand}"
-              ItemSelected="OnListViewItemSelected">
+              ItemSelected="OnItemSelected"
+              ItemTapped="OnItemTapped" 
+              SeparatorVisibility="None" 
+              SelectionMode="Single"
+              >
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                           Text="Delete" IsDestructive="True"/>
+                        <MenuItem Clicked="OnCopy" CommandParameter="{Binding .}"
+                           Text="Copy"  />
+                        <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
+                           Text="Edit"  />
+                    </ViewCell.ContextActions>
                     <Grid BackgroundColor="#DAFF7F">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="5" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.4*" />
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="0.2*" />
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="120" />
                         </Grid.ColumnDefinitions>
                         
                         <Frame Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Chocolate"></Frame>
-                        <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0" 
+                        <Label Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" 
                                    Text="{Binding Account}" TextColor = "#7F3300"
                                    FontSize="Micro"/>
                         <Label Grid.Column="1" Grid.Row="1" Text="{Binding Password}" TextColor = "#267F00"
                                FontSize="Micro"/>
                         <Label Grid.Column="2" Grid.Row="1" Text="{Binding Name}"  Margin="0,0,10,0"
                                    FontSize="Micro"/>
-                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding CreateTime}"  Margin="0,0,10,0"
+                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding CreateDate}"  Margin="0,0,20,0"
                                    FontSize="Small"/>
                     </Grid>
                 </ViewCell>

@@ -14,7 +14,7 @@
             <Label Text="Name" />
             <Entry Text="{Binding Name}" />
 
-            <Button Text="Save" Clicked="OnSaveClicked" />
+            <Button x:Name="btnAction" Text="Save" Clicked="OnSaveClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
